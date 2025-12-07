@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from app.db.base import db_settings
 import uvicorn
@@ -23,3 +24,11 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(users.user_router)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins = ["*"],             
+    allow_credentials = False,       
+    allow_methods = ["*"],           
+    allow_headers = ["*"],           
+)

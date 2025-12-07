@@ -8,9 +8,9 @@ user_router = APIRouter(prefix="/users", tags=['users'])
 @user_router.post("/add-user", summary="Добавить пользователя")
 async def add_user(cred: UsersSchema):
     await crud.add_user(cred.password, cred.username)
-    logger.info("Функция выполнила работу успешно")
+    logger.info("Функция add_user выполнила работу успешно")
 
-    return {"status" : True, "message" : "Пользователь добавлен"}
+    return {"status" : True, "message" : f"Пользователь {cred.username} добавлен"}
 
 @user_router.post("/get-user", summary="Найти пользователя по username")
 async def get_user(find_user: FindUsersSchema):
